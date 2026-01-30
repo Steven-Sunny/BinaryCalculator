@@ -96,21 +96,46 @@ public class Binary
      * @return A binary variable with a value of <i>num1 | num2</i>.
      */
     public static Binary or(Binary num1, Binary num2) {
+        // StringBuilder is used to promote faster concatenation
         StringBuilder result = new StringBuilder();
+        // Start tracking from the last character (the least significant bit)
         int i = num1.number.length() - 1;
         int j = num2.number.length() - 1;
-
-        // Loop until we process all bits from both numbers
+        // Continue looping as long as at least one binary string has remaining bits
         while (i >= 0 || j >= 0) {
-            char bit1 = (i >= 0) ? num1.number.charAt(i--) : '0';
-            char bit2 = (j >= 0) ? num2.number.charAt(j--) : '0';
+            char bit1;
+            char bit2;
+            // Check if the first binary still has bits remaining
+            if (i >= 0) {
+                // Assign the character bit at the current index
+                bit1 = num1.number.charAt(i);
+                // Decrement bit count after fetching the bit
+                i = i - 1;
+            } else {
+                // No more bits for num1, treat the missing bit as '0'
+                bit1 = '0';
+            }
 
+            // Check if the second binary still has bits remaining
+            if (j >= 0) {
+                // Assign the character bit at the current index
+                bit2 = num2.number.charAt(j);
+                // Decrement bit count after fetching the bit
+                j = j - 1;
+            } else {
+                // No more bits for num2, treat the missing bit as '0'
+                bit2 = '0';
+            }
+            // Logic for Bitwise OR: If either bit is '1', the result bit is '1'
             if (bit1 == '1' || bit2 == '1') {
+                // Insert '1' at the beginning of the result string
                 result.insert(0, "1");
             } else {
+                // Insert '0' at the beginning of the result string
                 result.insert(0, "0");
             }
         }
+        // Return Binary value after operation (also converting from StringBuilder obj to String)
         return new Binary(result.toString());
     }
 
@@ -120,24 +145,48 @@ public class Binary
      *
      * @param num1 The first operand object
      * @param num2 The second operand object
-     * @return A binary variable with a value of <i>num1 & num2</i>.
+     * @return A binary variable with a value of <i>num1 &amp; num2</i>.
      */
     public static Binary and(Binary num1, Binary num2) {
+        // StringBuilder is used to promote faster concatenation
         StringBuilder result = new StringBuilder();
+        // Start tracking from the last character (the least significant bit)
         int i = num1.number.length() - 1;
         int j = num2.number.length() - 1;
-
-        // Loop until we process all bits from both numbers
+        // Continue looping as long as at least one binary string has remaining bits
         while (i >= 0 || j >= 0) {
-            char bit1 = (i >= 0) ? num1.number.charAt(i--) : '0';
-            char bit2 = (j >= 0) ? num2.number.charAt(j--) : '0';
-
+            char bit1;
+            char bit2;
+            // Check if the first binary still has bits remaining
+            if (i >= 0) {
+                // Assign the character bit at the current index
+                bit1 = num1.number.charAt(i);
+                // Decrement bit count after fetching the bit
+                i = i - 1;
+            } else {
+                // No more bits for num1, treat the missing bit as '0'
+                bit1 = '0';
+            }
+            // Check if the second binary still has bits remaining
+            if (j >= 0) {
+                // Assign the character bit at the current index
+                bit2 = num2.number.charAt(j);
+                // Decrement bit count after fetching the bit
+                j = j - 1;
+            } else {
+                // No more bits for num2, treat the missing bit as '0'
+                bit2 = '0';
+            }
+            // Logic for Bitwise AND: If both bits are '1', the result bit is '1'
             if (bit1 == '1' && bit2 == '1') {
+                // Insert '1' at the beginning of the result string
                 result.insert(0, "1");
             } else {
+                // Insert '0' at the beginning of the result string
                 result.insert(0, "0");
             }
         }
+        // Return Binary value after operation (also converting from StringBuilder obj to String)
         return new Binary(result.toString());
     }
 
@@ -150,6 +199,7 @@ public class Binary
      * @return A binary variable with a value of <i>num1 * num2</i>.
      */
     public static Binary multiply(Binary num1, Binary num2) {
+        // Initialize the starting binary value to 0
         Binary result = new Binary("0");
         String s2 = num2.number;
 
@@ -157,13 +207,18 @@ public class Binary
         for (int i = 0; i < s2.length(); i++) {
             // If the bit is '1', shift num1 left by 'i' positions and add to result
             if (s2.charAt(s2.length() - 1 - i) == '1') {
+                // Create a temporary string to hold the shifted value
+                // StringBuilder is used to promote faster concatenation
                 StringBuilder shiftedValue = new StringBuilder(num1.number);
                 for (int j = 0; j < i; j++) {
-                    shiftedValue.append("0"); // Shifting is just adding zeros to the end
+                    // Shifting is just adding zeros to the end
+                    shiftedValue.append("0");
                 }
+                // Add the shifted value into the final result
                 result = add(result, new Binary(shiftedValue.toString()));
             }
         }
+        // Return Binary value after operation
         return result;
     }
 }

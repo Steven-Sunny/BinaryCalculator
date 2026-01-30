@@ -118,10 +118,10 @@ public class BinaryTest
         Binary binary3=Binary.add(binary1,binary2);
         assertTrue( binary3.getValue().equals("0"));
     }
-    //
-    //
-    //
-    //New tests
+
+     /**
+     * Test The OR functions with two binary values
+     */
     @Test
     public void or1() {
         // Standard OR logic: 1010 | 1100 = 1110
@@ -131,6 +131,9 @@ public class BinaryTest
         assertTrue(result.getValue().equals("1110"));
     }
 
+    /**
+     * Test The OR functions with two binary values, the first one is shorter than the second
+     */
     @Test
     public void or2() {
         // Testing padding logic: 1 | 1010 should be treated as 0001 | 1010 = 1011
@@ -140,15 +143,21 @@ public class BinaryTest
         assertTrue(result.getValue().equals("1011"));
     }
 
+    /**
+     * Test The OR functions with two 0 binary values of different lengths
+     */
     @Test
     public void or3() {
-        // Edge case: 0 | 0 = 0
+        // 000 | 0 = 0
         Binary b1 = new Binary("000");
         Binary b2 = new Binary("0");
         Binary result = Binary.or(b1, b2);
-        assertTrue(result.getValue().equals("000"));
+        assertTrue(result.getValue().equals("0"));
     }
 
+    /**
+     * Test The AND functions with two binary values
+     */
     @Test
     public void and1() {
         // 1011 (11) AND 1101 (13) = 1001 (9)
@@ -159,27 +168,35 @@ public class BinaryTest
         assertTrue(result.getValue().equals("1001"));
     }
 
+    /**
+     * Test The AND functions with two binary values, the first one is longer than the second
+     */
     @Test
     public void and2() {
         // 111 (7) AND 1 (1)
-        // The logic should pad '1' to '001', resulting in '001'
         Binary b1 = new Binary("111");
         Binary b2 = new Binary("1");
         Binary result = Binary.and(b1, b2);
 
-        assertTrue(result.getValue().equals("001"));
+        assertTrue(result.getValue().equals("1"));
     }
 
+    /**
+     * Test The AND functions with two binary bitwise inverted values, should be 0
+     */
     @Test
     public void and3() {
-        // 1010 (10) AND 0101 (5) = 0000 (0)
+        // 1010 (10) AND 0101 (5) = 0 (0)
         Binary b1 = new Binary("1010");
         Binary b2 = new Binary("0101");
         Binary result = Binary.and(b1, b2);
 
-        assertTrue(result.getValue().equals("0000"));
+        assertTrue(result.getValue().equals("0"));
     }
 
+    /**
+     * Test The multiply functions by multiplying a binary value by 0
+     */
     @Test
     public void multiply1() {
         // 1011 (11) * 0 (0) = 0
@@ -190,6 +207,9 @@ public class BinaryTest
         assertTrue(result.getValue().equals("0"));
     }
 
+    /**
+     * Test The multiply functions by multiplying a binary value by 1
+     */
     @Test
     public void multiply2() {
         // 1101 (13) * 1 (1) = 1101 (13)
@@ -200,6 +220,9 @@ public class BinaryTest
         assertTrue(result.getValue().equals("1101"));
     }
 
+    /**
+     * Test The multiply functions by multiplying two binary values
+     */
     @Test
     public void multiply3() {
         // 11 (3) * 10 (2) = 110 (6)
@@ -207,6 +230,6 @@ public class BinaryTest
         Binary b2 = new Binary("10");
         Binary result = Binary.multiply(b1, b2);
 
-        assertTrue(result.getValue().endsWith("110"));
+        assertTrue(result.getValue().equals("110"));
     }
 }
