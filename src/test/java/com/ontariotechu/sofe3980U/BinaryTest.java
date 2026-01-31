@@ -124,7 +124,7 @@ public class BinaryTest
      */
     @Test
     public void or1() {
-        // Standard OR logic: 1010 | 1100 = 1110
+        // 1010 | 1100 = 1110
         Binary b1 = new Binary("1010");
         Binary b2 = new Binary("1100");
         Binary result = Binary.or(b1, b2);
@@ -136,7 +136,7 @@ public class BinaryTest
      */
     @Test
     public void or2() {
-        // Testing padding logic: 1 | 1010 should be treated as 0001 | 1010 = 1011
+        // 1 | 1010 = 1011
         Binary b1 = new Binary("1");
         Binary b2 = new Binary("1010");
         Binary result = Binary.or(b1, b2);
@@ -160,7 +160,7 @@ public class BinaryTest
      */
     @Test
     public void and1() {
-        // 1011 (11) AND 1101 (13) = 1001 (9)
+        // 1011 & 1101 = 1001
         Binary b1 = new Binary("1011");
         Binary b2 = new Binary("1101");
         Binary result = Binary.and(b1, b2);
@@ -173,7 +173,7 @@ public class BinaryTest
      */
     @Test
     public void and2() {
-        // 111 (7) AND 1 (1)
+        // 111 & 1 = 1
         Binary b1 = new Binary("111");
         Binary b2 = new Binary("1");
         Binary result = Binary.and(b1, b2);
@@ -186,7 +186,7 @@ public class BinaryTest
      */
     @Test
     public void and3() {
-        // 1010 (10) AND 0101 (5) = 0 (0)
+        // 1010 & 0101 = 0
         Binary b1 = new Binary("1010");
         Binary b2 = new Binary("0101");
         Binary result = Binary.and(b1, b2);
